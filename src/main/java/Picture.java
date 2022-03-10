@@ -1,5 +1,3 @@
-package com.galvanize;
-
 public class Picture {
 	private boolean framed;
 	private int height;

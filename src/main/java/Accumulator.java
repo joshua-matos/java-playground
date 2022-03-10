@@ -4,15 +4,25 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Accumulator {
- int count = 0;
+
 	public static void main(String... args) {
 		Accumulator testAccumulator = new Accumulator();
 		String[] myArray = {};
 		System.out.flush();
 		System.out.println(testAccumulator.toSentence(myArray) + "\n");
 		Integer[] numbers = new Integer[]{1, 1, -3};
-		System.out.println(testAccumulator.addStrings("HelloWorld"));
+		//System.out.println(testAccumulator.sumOfPostiveValues(numbers));
 
+		String[] names = {"Alice", "Bob", "Kat"};
+		//System.out.println(testAccumulator.toSentence(names));
+
+		Runnable runner = () -> {
+			//cannot call method below and sumOfPositiveValues(); new AtomicInteger locks thread;
+			System.out.println(testAccumulator.addStrings("HelloWorld"));
+		};
+		runner.run();
+		Thread helloWorldThread = new Thread(runner);
+		helloWorldThread.start();
 	}
 
 	public String toSentence(String[] arrayOfStrings) {
@@ -35,10 +45,9 @@ public class Accumulator {
 
 	public static Integer sumOfPostiveValues(Integer[] nums) {
 		List<Integer> integers = Arrays.asList(nums);
-		Integer sum = integers.stream()
+		return integers.stream()
 				.filter(i -> i > 0)
 				.reduce(0, Integer::sum);
-		return sum;
 	}
 
 
@@ -53,6 +62,7 @@ public class Accumulator {
 
 		listOfChars.forEach(
 				(e) ->  {
+					characterCount.notify();
 					//No value, initialize with 0
 					characterCount
 							.putIfAbsent(
@@ -64,12 +74,5 @@ public class Accumulator {
 							.incrementAndGet();
 		});
 		return characterCount;
-	}
-
- public int incrementCount() {
-		return this.count++;
- }
-	public void resetCount() {
-		 this.count=0;
 	}
 }
