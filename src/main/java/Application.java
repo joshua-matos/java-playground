@@ -35,7 +35,7 @@ public class Application extends JFrame {
 	private final List<User> allUsersOfGame = new ArrayList<>();
 
 	//create a random number when Application is called
-	private final int randomNumber = new Random().nextInt(1);
+	private final int randomNumber = new Random().nextInt(100);
 
 	//store the last user
 	public LastUserTracker lastUser = new LastUserTracker();
