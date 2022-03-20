@@ -1,3 +1,4 @@
+import javax.swing.text.Document;
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -9,4 +10,5 @@ public class Browser {
 	private LocalDateTime visitedAt;
 	private HashMap<String, Integer> visitCount;
 	private boolean on;
+
 }
